@@ -55,8 +55,11 @@ int main (int ac, char** av)
         std::cerr << "Error. Cannot open outfile: " << inFile << std::endl;
         exit(EXIT_FAILURE);
     }
-    for (int y = 0; y < height; y++){
-        for (int x = 0; x < width; x++){
+    // added scale to shrink the img
+    int scaleX = 4;
+    int scaleY = 8;
+    for (int y = 0; y < height; y+=scaleY){
+        for (int x = 0; x < width; x+=scaleX){
             Pixel& p = pixels[y * width + x];
             int normPix = static_cast<int>(0.299*p.r + 0.587*p.g + 0.114*p.b);
             char outChar = normToAscii(normPix, asciiSet);
